@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { getAllUsers } from '../features/actions/readUsersAction'
 
 const Read = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAllUsers())        
+    },[dispatch])
   return (
     <div>
         <h2>Users</h2>

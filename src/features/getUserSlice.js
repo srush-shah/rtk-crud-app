@@ -27,15 +27,16 @@ export const gitUser = createSlice({
             state.users.push(action.payload)
         }).addCase(createUser.rejected, (state, action) => {
             state.loading = false
-            state.error = action.payload.message
-        }).addCase(getAllUsers.pending, state => {
+            state.error = action.payload
+        })
+        builder.addCase(getAllUsers.pending, state => {
             state.loading = true
         }).addCase(getAllUsers.fulfilled, (state, action) => {
             state.loading = false
             state.users = action.payload
         }).addCase(getAllUsers.rejected, (state, action) => {
             state.loading = false
-            state.error = action.payload.message
+            state.error = action.payload
         })
     }
 })
