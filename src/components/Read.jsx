@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../features/actions/readUsersAction'
 import CustomModal from './CustomModal'
+import { deleteUser } from '../features/actions/deleteUserAction'
 
 const Read = () => {
     const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const Read = () => {
                         <p className="card-text">{user.gender}</p>
                         <button className="card- btn btn-primary mx-3" onClick={() => [setId(user.id), setShowPopup(true)]}>View</button>
                         <button className="card- btn btn-primary mx-3">Edit</button>
-                        <button className="card- btn btn-primary mx-3">Delete</button>
+                        <button className="card- btn btn-primary mx-3" onClick={() => dispatch(deleteUser(user.id))}>Delete</button>
                     </div>
                 </div>
             ))
