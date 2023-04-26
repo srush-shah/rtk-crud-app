@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../features/actions/readUsersAction'
+import CustomModal from './CustomModal'
 
 const Read = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const Read = () => {
 
   return (
     <div>
+        <CustomModal/>
         <h2>Users</h2>
         <div>
             {users && users.map(user => (
