@@ -11,6 +11,7 @@ const Read = () => {
     const [id,setId] = useState()
 
     const [showPopup, setShowPopup] = useState(false)
+    const [radioData, setRadioData] = useState('')
 
     useEffect(() => {
         dispatch(getAllUsers())        
@@ -26,6 +27,20 @@ const Read = () => {
     <div>
         {showPopup && <CustomModal id={id} showPopup={showPopup} setShowPopup={setShowPopup} />}
         <h2>Users</h2>
+        <div className='d-flex justify-content-center gap-3'>
+            <div className='d-flex gap-1'>
+                <input className="form-check-input" type="radio" name="gender" id="flexRadioDefault1" checked={radioData === ''} onChange={(e) => setRadioData('')} />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">All</label>
+            </div>
+            <div className='d-flex gap-1'>
+                <input className="form-check-input" type="radio" name="gender" value={"Male"} id="flexRadioDefault2" checked={radioData === 'Male'} onChange={(e) => setRadioData(e.target.value)} />
+                <label className="form-check-label" htmlFor="flexRadioDefault2">Male</label>
+            </div>
+            <div className='d-flex gap-1'>
+                <input className="form-check-input" type="radio" name="gender" value={"Female"} id="flexRadioDefault3" checked={radioData === 'Female'} onChange={(e) => setRadioData(e.target.value)} />
+                <label className="form-check-label" htmlFor="flexRadioDefault3">Female</label>
+            </div>
+        </div>
         <div>
             {users && 
             
@@ -34,6 +49,12 @@ const Read = () => {
                     return user
                 } else {
                     return user.name.toLowerCase().includes(searchData.toLowerCase()) || user.email.toLowerCase().includes(searchData.toLowerCase())
+                }
+            }).filter(user => {
+                if(radioData === 'Male' || radioData === 'Female') {
+                    return user.gender === radioData
+                } else {
+                    return user
                 }
             }).map(user => (
                 <div key={user.id} className="card w-50 mx-auto my-2 d-flex">
