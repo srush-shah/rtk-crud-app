@@ -18,7 +18,7 @@ const Navbar = () => {
                     <a className="nav-link" href="#">All Users</a>
                     </li>
                 </ul>
-                <form className="d-flex w-50" role="search">
+                <form className="d-flex w-50 mx-auto" role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                 </form>
                 </div>

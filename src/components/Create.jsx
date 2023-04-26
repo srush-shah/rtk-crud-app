@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createUser } from '../features/actions/createUserAction'
+import { useNavigate } from 'react-router-dom'
 
 const Create = () => {
     const [user, setUser] = useState({})
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const setUserData = e => {
         setUser({...user, [e.target.name]: e.target.value})
@@ -14,6 +16,7 @@ const Create = () => {
         e.preventDefault()
         console.log(user)
         dispatch(createUser(user))
+        navigate('/read')
     }
 
   return (
