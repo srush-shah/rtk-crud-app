@@ -16,3 +16,5 @@ export const gitUser = createSlice({
         }
     }
 })
+
+export default gitUser.reducer
