@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //Actions
 import { createUser } from "./actions/createUserAction";
+import { getAllUsers } from "./actions/readUsersAction";
 
 
 // User Slice
@@ -26,7 +27,15 @@ export const gitUser = createSlice({
             state.users.push(action.payload)
         }).addCase(createUser.rejected, (state, action) => {
             state.loading = false
-            state.error = action.payload
+            state.error = action.payload.message
+        }).addCase(getAllUsers.pending, state => {
+            state.loading = true
+        }).addCase(getAllUsers.fulfilled, (state, action) => {
+            state.loading = false
+            state.users = action.payload
+        }).addCase(getAllUsers.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload.message
         })
     }
 })

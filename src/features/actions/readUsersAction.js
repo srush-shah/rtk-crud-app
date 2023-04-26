@@ -8,6 +8,7 @@ export const getAllUsers = createAsyncThunk('getAllUsers', async ({rejectWithVal
 
     try {
        const result = await res.json() 
+       return result
     } catch (error) {
        return rejectWithValue(error) 
     }
