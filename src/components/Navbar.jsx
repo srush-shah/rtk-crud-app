@@ -1,9 +1,16 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { searchUser } from '../features/getUserSlice'
 
 const Navbar = () => {
     const allUsers = useSelector(state => state.app.users)
+    const [searchData, setSearchData] = useState('')
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(searchUser(searchData))
+    }, [searchData])
   return (
     <div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -21,9 +28,7 @@ const Navbar = () => {
                     <Link to={"/read"} className="nav-link">All Users ({allUsers.length})</Link>
                     </li>
                 </ul>
-                <form className="d-flex w-50 mx-auto" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                </form>
+                <input className="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search" onChange={e => setSearchData(e.target.value)} />
                 </div>
             </div>
         </nav>

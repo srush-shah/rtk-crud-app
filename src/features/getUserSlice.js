@@ -69,3 +69,4 @@ export const gitUser = createSlice({
 })
 
 export default gitUser.reducer
+export const {searchUser} = gitUser.actions

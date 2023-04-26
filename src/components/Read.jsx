@@ -14,9 +14,9 @@ const Read = () => {
 
     useEffect(() => {
         dispatch(getAllUsers())        
-    },[dispatch])
+    },[])
 
-    const {users, loading} = useSelector(state => state.app)
+    const {users, loading, searchData} = useSelector(state => state.app)
 
     if(loading) {
         return <h2>Loading...</h2>
@@ -27,7 +27,15 @@ const Read = () => {
         {showPopup && <CustomModal id={id} showPopup={showPopup} setShowPopup={setShowPopup} />}
         <h2>Users</h2>
         <div>
-            {users && users.map(user => (
+            {users && 
+            
+            users.filter(user => {
+                if(searchData.length === 0) {
+                    return user
+                } else {
+                    return user.name.toLowerCase().includes(searchData.toLowerCase()) || user.email.toLowerCase().includes(searchData.toLowerCase())
+                }
+            }).map(user => (
                 <div key={user.id} className="card w-50 mx-auto my-2 d-flex">
                     {/* <img src={user.avatar} alt="avatar" className='rounded-circle w-25 mx-auto my-2' /> */}
                     <div className="card-body">
