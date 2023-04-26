@@ -21,11 +21,11 @@ export const gitUser = createSlice({
     extraReducers: (builder) => {
         builder.addCase(createUser.pending, state => {
             state.loading = true
-        }).addCase(createUser.fulfilled, (state, action) => {
-            state.loading = false,
+        }).addCase(createUser.fulfilled, (state,action) => {
+            state.loading = false
             state.users.push(action.payload)
-        }).addCase(createUser.rejected, (state,action) => {
-            state.loading = false,
+        }).addCase(createUser.rejected, (state, action) => {
+            state.loading = false
             state.error = action.payload
         })
     }
