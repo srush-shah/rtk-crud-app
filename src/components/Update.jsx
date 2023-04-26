@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import { updateUser } from '../features/actions/updateUserAction'
 
 const Update = () => {
     const {id} = useParams()
     const {users, loading} = useSelector(state => state.app)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [updateData, setUpdateData] = useState()
     
@@ -19,11 +22,17 @@ const Update = () => {
         setUpdateData({...updateData, [e.target.name]: e.target.value})
     }
 
+    const handleUpdate = (e) => {
+        e.preventDefault()
+        dispatch(updateUser(updateData))
+        navigate("/read")
+    }
+
     
   return (
     <div>
         <h2>Edit User Details</h2>
-        <form className='w-50 mx-auto my-5'>
+        <form className='w-50 mx-auto my-5' onSubmit={handleUpdate}>
             <div className="mb-3">
                 <label className="form-label">Name</label>
                 <input type="text" name='name' className="form-control" value={updateData && updateData.name} onChange={newData} />

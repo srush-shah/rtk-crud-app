@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createUser } from "./actions/createUserAction";
 import { getAllUsers } from "./actions/readUsersAction";
 import { deleteUser } from "./actions/deleteUserAction";
+import { updateUser } from "./actions/updateUserAction";
 
 
 // User Slice
@@ -50,6 +51,17 @@ export const gitUser = createSlice({
                 state.users = state.users.filter(ele => ele.id !== id)
             }
         }).addCase(deleteUser.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        })
+        builder.addCase(updateUser.pending, state => {
+            state.loading = true
+        }).addCase(updateUser.fulfilled, (state, action) => {
+            state.loading = false
+            state.users = state.users.map(user => (
+                user.id === action.payload.id ? action.payload : user
+            ))
+        }).addCase(updateUser.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
         })
