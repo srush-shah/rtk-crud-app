@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../features/actions/readUsersAction'
 import CustomModal from './CustomModal'
 import { deleteUser } from '../features/actions/deleteUserAction'
+import { Link } from 'react-router-dom'
 
 const Read = () => {
     const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const Read = () => {
                         <h5 className="card-subtitle mb-2 text-body-secondary">{user.email}</h5>
                         <p className="card-text">{user.gender}</p>
                         <button className="card- btn btn-primary mx-3" onClick={() => [setId(user.id), setShowPopup(true)]}>View</button>
-                        <button className="card- btn btn-primary mx-3">Edit</button>
+                        <Link to={`/edit/${user.id}`} className="card- btn btn-primary mx-3">Edit</Link>
                         <button className="card- btn btn-primary mx-3" onClick={() => dispatch(deleteUser(user.id))}>Delete</button>
                     </div>
                 </div>
