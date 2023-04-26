@@ -5,7 +5,7 @@ import { updateUser } from '../features/actions/updateUserAction'
 
 const Update = () => {
     const {id} = useParams()
-    const {users, loading} = useSelector(state => state.app)
+    const users = useSelector(state => state.app.users)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
