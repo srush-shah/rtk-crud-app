@@ -1,12 +1,19 @@
+import { Route, Routes } from 'react-router-dom';
+
+// CSS
+import './App.css'
+
+//Components
 import Create from "./components/Create";
 import Navbar from "./components/Navbar";
-import './App.css'
 
 function App() {
   return (
     <div className="App">
       <Navbar/>
-      <Create/>
+      <Routes>
+        <Route exact path='/' element={<Create/>} />
+      </Routes>
     </div>
   );
 }
