@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers } from '../features/actions/readUsersAction'
 import CustomModal from './CustomModal'
 
 const Read = () => {
     const dispatch = useDispatch()
+
+    const [id,setId] = useState()
+
+    const [showPopup, setShowPopup] = useState(false)
 
     useEffect(() => {
         dispatch(getAllUsers())        
@@ -18,7 +22,7 @@ const Read = () => {
 
   return (
     <div>
-        <CustomModal/>
+        {showPopup && <CustomModal id={id} showPopup={showPopup} setShowPopup={setShowPopup} />}
         <h2>Users</h2>
         <div>
             {users && users.map(user => (
@@ -28,9 +32,9 @@ const Read = () => {
                         <h4 className="card-title">{user.name}</h4>
                         <h5 className="card-subtitle mb-2 text-body-secondary">{user.email}</h5>
                         <p className="card-text">{user.gender}</p>
-                        <a href="#" className="card-link">View</a>
-                        <a href="#" className="card-link">Edit</a>
-                        <a href="#" className="card-link">Delete</a>
+                        <button className="card- btn btn-primary mx-3" onClick={() => [setId(user.id), setShowPopup(true)]}>View</button>
+                        <button className="card- btn btn-primary mx-3">Edit</button>
+                        <button className="card- btn btn-primary mx-3">Delete</button>
                     </div>
                 </div>
             ))
