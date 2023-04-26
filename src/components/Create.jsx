@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { createUser } from '../features/actions/createUserAction'
 
 const Create = () => {
     const [user, setUser] = useState({})
@@ -12,11 +13,12 @@ const Create = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(user)
-        // dispatch()
+        dispatch(createUser(user))
     }
 
   return (
     <div>
+        <h2>Enter User Details</h2>
         <form className='w-50 mx-auto my-5' onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label className="form-label">Name</label>
